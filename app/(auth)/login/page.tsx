@@ -3,7 +3,7 @@ import React from 'react';
 const LoginPage = () => {
   return (
     <div>
-      Login Page
+      Login Page without auth URL
     </div>
   );
 };

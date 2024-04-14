@@ -3,7 +3,7 @@ import React from 'react';
 const RegisterPage = () => {
   return (
     <div>
-      Register Page
+      Register Page without auth URL
     </div>
   );
 };
