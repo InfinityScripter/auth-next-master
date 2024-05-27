@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import {db} from "@/lib/db";
 import {RegisterSchema} from "@/schemas";
 import {revalidatePath, revalidateTag} from "next/cache";
+import {getUserByEmail} from "@/data/user";
 
 export const register = async (value:z.infer<typeof RegisterSchema>) => {
 
@@ -19,9 +20,7 @@ export const register = async (value:z.infer<typeof RegisterSchema>) => {
 
   const {email,password,name} = validatedFields.data
   const hashedPassword = await bcrypt.hash(password, 10)
-const existingUser = await db.user.findUnique(
-    {where: {email}}
-);
+const existingUser = await getUserByEmail(email)
   if (existingUser) {
     return {error: "This email is already in use. Please use another email."}
   }
