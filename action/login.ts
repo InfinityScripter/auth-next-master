@@ -32,11 +32,11 @@ const {email,password} = validatedFields.data
  if (error instanceof AuthError) {
    switch (error.type) {
      case 'CredentialsSignin':
-       return {error: "Invalid credentials"}
+       return {error: "Invalid email or password"}
      default:
        return {error: "An error occurred"}
    }
+ }
+      throw error;
     }
- throw error;
-}
 }
