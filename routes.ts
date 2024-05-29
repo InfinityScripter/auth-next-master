@@ -12,7 +12,9 @@ export const publicRoutes = ["/"];
  * @type {string[]}
  */
 
-export const authRoutes = ["/auth/login", "/auth/register"];
+export const authRoutes = ["/auth/login", "/auth/register",
+"/auth/error", "/auth/verify-email", "/auth/reset-password",
+];
 
 /**
  * This file contains the routes that are
