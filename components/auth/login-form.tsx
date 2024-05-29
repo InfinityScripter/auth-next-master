@@ -12,6 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import {useSearchParams} from "next/navigation";
 
 import CardWrapper from '@/components/auth/card-wrapper';
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,8 @@ import {useState, useTransition} from "react";
 import {db} from "@/lib/db";
 
 export const LoginForm = () => {
+  const searchParams = useSearchParams();
+  const urlError = searchParams.get('error') === "OAuthAccountNotLinked" ? "Email already in use by different provider" : ''
   const [error,setError] = useState<string | undefined>('');
   const [success,setSuccess] = useState<string | undefined>('');
   const [isPending,startTransition] = useTransition()
@@ -38,8 +41,9 @@ export const LoginForm = () => {
     startTransition(() => {
       login(values)
         .then((data) => {
-          setSuccess(data.success)
-          setError(data.error)
+          setError(data?.error)
+          // TODO : Add when we add 2FA
+          // setSuccess(data?.success)
         })
     });
   };
@@ -89,7 +93,7 @@ export const LoginForm = () => {
               )}
             />
           </div>
-          <FormError message={error} />
+          <FormError message={error || urlError} />
           <FormSuccess message={success} />
           <Button
             disabled={isPending}
