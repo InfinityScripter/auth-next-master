@@ -4,12 +4,13 @@ import React from 'react';
 import {signIn} from "next-auth/react";
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
+import {FaYandex} from "react-icons/fa";
 import { Button } from '@/components/ui/button';
 import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
 let count = 0
 
 const Social = () => {
-    const onClick = (provider:"google"|"github") => {
+    const onClick = (provider:"google"|"github"|"yandex") => {
         signIn(provider,{callbackUrl:DEFAULT_LOGIN_REDIRECT,})
     }
   return (
@@ -26,6 +27,13 @@ const Social = () => {
       }}>
         <FaGithub className='h-5 w-5' />
       </Button>
+        <Button variant='outline' size='lg' className='w-full' onClick={() => {
+    onClick("yandex")
+      }}>
+        <FaYandex className='h-5 w-5' />
+      </Button>
+
+
     </div>
   );
 };
