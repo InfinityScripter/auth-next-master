@@ -4,7 +4,10 @@
  * @type {string[]}
  */
 
-export const publicRoutes = ["/"];
+export const publicRoutes = [
+    "/",
+"/auth/new-verification",
+];
 
 /**
  * This file contains the routes that are
