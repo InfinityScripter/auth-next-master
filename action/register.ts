@@ -4,15 +4,13 @@ import * as z from "zod";
 import bcrypt from "bcrypt";
 import {db} from "@/lib/db";
 import {RegisterSchema} from "@/schemas";
-import {revalidatePath, revalidateTag} from "next/cache";
 import {getUserByEmail} from "@/data/user";
+import {generateVerificationToken} from "@/lib/tokens";
 
 export const register = async (value:z.infer<typeof RegisterSchema>) => {
 
   console.log(value)
   const validatedFields = RegisterSchema.safeParse(value)
-  // revalidatePath()
-  // revalidateTag()
   if (!validatedFields.success) {
     console.log(validatedFields.error)
     return {error: "validatedFields.error"}
@@ -33,7 +31,8 @@ const existingUser = await getUserByEmail(email)
     },
   });
 
+  const verificationToken = await generateVerificationToken(email)
   // TODO : Send verification email to user
   console.log(db.user)
-  return {success: "user created successfully"}
+  return {success: "Confirmation email sent. Please check your email to verify your account."}
 }
