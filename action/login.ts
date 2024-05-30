@@ -8,6 +8,7 @@ import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
 import {AuthError} from "next-auth";
 import {generateVerificationToken} from "@/lib/tokens";
 import {getUserByEmail} from "@/data/user";
+import {sendVerificationEmail} from "@/lib/mail";
 
 export const login = async (value:z.infer<typeof LoginSchema>) => {
 
@@ -28,7 +29,10 @@ const {email,password} = validatedFields.data
 
   if (!existingUser.emailVerified) {
     const verificationToken = await generateVerificationToken(existingUser.email)
-  return {success: "Confirmation email sent. Please check your email to verify your account."}
+
+    await sendVerificationEmail(verificationToken.email, verificationToken.token)
+
+    return {success: "Confirmation email sent. Please check your email to verify your account."}
   }
 
   try {
