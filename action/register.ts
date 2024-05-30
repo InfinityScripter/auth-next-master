@@ -10,10 +10,8 @@ import {sendVerificationEmail} from "@/lib/mail";
 
 export const register = async (value:z.infer<typeof RegisterSchema>) => {
 
-  console.log(value)
   const validatedFields = RegisterSchema.safeParse(value)
   if (!validatedFields.success) {
-    console.log(validatedFields.error)
     return {error: "validatedFields.error"}
   }
 
@@ -34,6 +32,5 @@ const existingUser = await getUserByEmail(email)
 
   const verificationToken = await generateVerificationToken(email)
   await sendVerificationEmail(verificationToken.email, verificationToken.token)
-  console.log(db.user)
   return {success: "Confirmation email sent. Please check your email to verify your account."}
 }

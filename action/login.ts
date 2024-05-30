@@ -12,10 +12,8 @@ import {sendVerificationEmail} from "@/lib/mail";
 
 export const login = async (value:z.infer<typeof LoginSchema>) => {
 
-  console.log(value)
   const validatedFields = LoginSchema.safeParse(value)
   if (!validatedFields.success) {
-    console.log(validatedFields.error)
     return {error: "validatedFields.error"}
   }
 
