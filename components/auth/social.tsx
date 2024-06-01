@@ -6,12 +6,15 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import {FaYandex} from "react-icons/fa";
 import { Button } from '@/components/ui/button';
+import {useSearchParams}from "next/navigation";
 import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
 let count = 0
 
 const Social = () => {
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callbackUrl") ;
     const onClick = (provider:"google"|"github"|"yandex") => {
-        signIn(provider,{callbackUrl:DEFAULT_LOGIN_REDIRECT,})
+        signIn(provider,{callbackUrl:callbackUrl ||DEFAULT_LOGIN_REDIRECT })
     }
   return (
     <div className='flex items-center space-x-4'>

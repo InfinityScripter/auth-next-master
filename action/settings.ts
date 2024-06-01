@@ -58,7 +58,7 @@ const updatedUser = await db.user.update({
         ...values,
     }
 })
-    unstable_update({
+    await unstable_update({
         user: {
             name: updatedUser.name,
             email: updatedUser.email,
