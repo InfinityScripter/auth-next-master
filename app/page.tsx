@@ -25,9 +25,7 @@ export default function Home() {
             Firebase.
           </p>
           <div>
-            <LoginButton mode='modal'
-            asChild
-            >
+            <LoginButton mode='modal' asChild>
               <Button variant='secondary' size='lg'>
                 Sign In
               </Button>

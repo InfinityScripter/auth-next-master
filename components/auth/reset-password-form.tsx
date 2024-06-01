@@ -17,13 +17,13 @@ import CardWrapper from '@/components/auth/card-wrapper';
 import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
-import React, {useState, useTransition} from "react";
-import {reset} from "@/action/reset";
+import React, { useState, useTransition } from 'react';
+import { reset } from '@/action/reset';
 
 export const ResetPasswordForm = () => {
-  const [error,setError] = useState<string | undefined>('');
-  const [success,setSuccess] = useState<string | undefined>('');
-  const [isPending,startTransition] = useTransition()
+  const [error, setError] = useState<string | undefined>('');
+  const [success, setSuccess] = useState<string | undefined>('');
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof ResetSchema>>({
     resolver: zodResolver(ResetSchema),
     defaultValues: {
@@ -31,16 +31,15 @@ export const ResetPasswordForm = () => {
     },
   });
   const onSubmit = (values: z.infer<typeof ResetSchema>) => {
-    setError('')
-    setSuccess('')
+    setError('');
+    setSuccess('');
 
-    console.log(values)
+    console.log(values);
     startTransition(() => {
-      reset(values)
-        .then((data) => {
-          setError(data?.error)
-          setSuccess(data?.success)
-        })
+      reset(values).then((data) => {
+        setError(data?.error);
+        setSuccess(data?.success);
+      });
     });
   };
 
@@ -62,8 +61,10 @@ export const ResetPasswordForm = () => {
                   <FormControl>
                     <Input
                       disabled={isPending}
-
-                      {...field} type='email' placeholder={'E-mail'} />
+                      {...field}
+                      type='email'
+                      placeholder={'E-mail'}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -71,13 +72,15 @@ export const ResetPasswordForm = () => {
             />
           </div>
 
-          <FormError message={error } />
+          <FormError message={error} />
           <FormSuccess message={success} />
           <Button
             disabled={isPending}
-
-            variant='secondary' className='w-full' type='submit'>
-          Send reset email
+            variant='secondary'
+            className='w-full'
+            type='submit'
+          >
+            Send reset email
           </Button>
         </form>
       </Form>

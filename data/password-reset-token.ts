@@ -1,32 +1,29 @@
-import {db} from "@/lib/db";
+import { db } from '@/lib/db';
 
-export const getPasswordResetTokenByToken = async (token:string) => {
-    try {
+export const getPasswordResetTokenByToken = async (token: string) => {
+  try {
     const passwordResetToken = await db.passwordResetToken.findUnique({
-        where: {
+      where: {
         token,
-        },
+      },
     });
 
     return passwordResetToken;
-}
-catch (error) {
+  } catch (error) {
     return null;
-}
-}
+  }
+};
 
+export const getPasswordResetTokenByEmail = async (email: string) => {
+  try {
+    const passwordResetToken = await db.passwordResetToken.findFirst({
+      where: {
+        email,
+      },
+    });
 
-export const getPasswordResetTokenByEmail = async (email:string) => {
-    try {
-        const passwordResetToken = await db.passwordResetToken.findFirst({
-            where: {
-                email,
-            },
-        });
-
-        return passwordResetToken;
-    }
-    catch (error) {
-        return null;
-    }
-}
+    return passwordResetToken;
+  } catch (error) {
+    return null;
+  }
+};

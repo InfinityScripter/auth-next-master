@@ -4,10 +4,7 @@
  * @type {string[]}
  */
 
-export const publicRoutes = [
-    "/",
-"/auth/new-verification",
-];
+export const publicRoutes = ['/', '/auth/new-verification'];
 
 /**
  * This file contains the routes that are
@@ -16,11 +13,11 @@ export const publicRoutes = [
  */
 
 export const authRoutes = [
-    "/auth/login",
-    "/auth/register",
-    "/auth/error",
-    "/auth/reset",
-    "/auth/new-password"
+  '/auth/login',
+  '/auth/register',
+  '/auth/error',
+  '/auth/reset',
+  '/auth/new-password',
 ];
 
 /**
@@ -29,11 +26,11 @@ export const authRoutes = [
  * @type {string}
  */
 
-export const apiAuthPrefix = "/api/auth";
+export const apiAuthPrefix = '/api/auth';
 
 /**
  * default login redirect
  * @type {string}
  */
 
-export const DEFAULT_LOGIN_REDIRECT = "/settings";
+export const DEFAULT_LOGIN_REDIRECT = '/settings';
