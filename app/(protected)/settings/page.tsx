@@ -1,26 +1,31 @@
-import React from 'react';
-import {auth, signOut} from "@/auth";
-import {Button} from "@/components/ui/button";
+"use client";
 
-const SettingsPage = async () => {
-    const session = await auth();
+import React from 'react';
+import {Button} from "@/components/ui/button";
+import {signOut} from "next-auth/react";
+import {logout} from "@/action/logout";
+import {useCurrentUser} from "@/hooks/use-current-user";
+
+const SettingsPage =  () => {
+    const user = useCurrentUser();
+    const onSignOut = async  () => {
+       // 1st method
+        await signOut();
+        //2nd method
+        //  logout();
+    }
     return (
-        <div>
-            Private settings Page
-            <p>{JSON.stringify(session)}</p>
-            <form action={
-                async ()=> {
-                    "use server";
-                    await signOut();
-                }
-            }
+        <>
+            <form
+
             >
                 <Button
-                    variant="default"
+                    variant="outline"
                     className=" mt-4"
+                    onClick={onSignOut}
                     type="submit">Sign Out</Button>
             </form>
-        </div>
+        </>
     );
 };
 
