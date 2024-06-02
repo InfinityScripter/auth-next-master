@@ -22,6 +22,8 @@ import { login } from '@/action/login';
 import React, { useState, useTransition } from 'react';
 import { db } from '@/lib/db';
 import Link from 'next/link';
+import {InputOTP, InputOTPGroup, InputOTPSlot} from "@/components/ui/input-otp";
+import {REGEXP_ONLY_DIGITS_AND_CHARS} from "input-otp";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -83,11 +85,19 @@ export const LoginForm = () => {
                 <FormItem>
                   <FormLabel>Two Factor Code</FormLabel>
                   <FormControl>
-                    <Input
-                      disabled={isPending}
-                      {...field}
-                      placeholder={'123456'}
-                    />
+                    <InputOTP
+                        disabled={isPending}
+                        {...field}
+                        maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
+                      <InputOTPGroup>
+                        <InputOTPSlot index={0} />
+                        <InputOTPSlot index={1} />
+                        <InputOTPSlot index={2} />
+                        <InputOTPSlot index={3} />
+                        <InputOTPSlot index={4} />
+                        <InputOTPSlot index={5} />
+                      </InputOTPGroup>
+                    </InputOTP>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
